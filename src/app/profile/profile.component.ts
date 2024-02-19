@@ -3,7 +3,6 @@ import {StorageService} from "../_services/storage.service";
 import {UserService} from "../_services/user.service";
 import {User} from "../user";
 import {Router} from "@angular/router";
-import {environment} from "../../environments/environment";
 import {FormControl} from "@angular/forms";
 import {ThemePalette} from "@angular/material/core";
 
@@ -25,7 +24,8 @@ export class ProfileComponent implements OnInit {
     this.userService.save(this.user).subscribe(
       response => {
         console.log('Сохранено успешно', response);
-        localStorage.setItem(`${environment.userString}`, JSON.stringify(response))
+        this.storageService.setUser(JSON.stringify(response));
+        // localStorage.setItem(`${environment.userString}`, JSON.stringify(response))
         this.gotoProfile();
       },
       error => {

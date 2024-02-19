@@ -2,6 +2,7 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
+import {StorageService} from "./storage.service";
 
 const URLS = `${environment.authUrl}`;
 
@@ -9,7 +10,7 @@ const URLS = `${environment.authUrl}`;
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private storageService: StorageService, private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(
@@ -34,14 +35,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    localStorage.removeItem(`${environment.userString}`);
-    localStorage.removeItem(`${environment.accessTokenString}`);
-    localStorage.removeItem(`${environment.refreshTokenString}`);
-    localStorage.clear();
+    this.storageService.clean();
     return this.http.post(URLS + 'logout', { });
-  }
-
-  public getToken(): string | null {
-    return localStorage.getItem(`${environment.accessTokenString}`);
   }
 }

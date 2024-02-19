@@ -42,9 +42,4 @@ export class TrainComponent {
       this.alertVisible = true;
     }
   }
-
-  protected readonly alert = alert;
-  protected readonly style = style;
-  protected readonly max = max;
-  protected readonly min = min;
 }

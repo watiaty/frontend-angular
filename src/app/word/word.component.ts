@@ -17,7 +17,7 @@ export class WordComponent implements OnInit {
   utterance = new SpeechSynthesisUtterance();
   role?: String;
 
-  constructor(private router: Router, private storageService: StorageService, private route: ActivatedRoute, private wordService: WordService) {
+  constructor(private storageService: StorageService, private route: ActivatedRoute, private wordService: WordService) {
     this.word = new WordInfo("", "", "", "", [], []);
   }
 

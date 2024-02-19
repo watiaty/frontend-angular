@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../_services/auth.service";
 import {StorageService} from "../_services/storage.service";
-import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -33,9 +32,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe({
       next: response => {
         if (response) {
-          localStorage.setItem(`${environment.accessTokenString}`, response.access_token);
-          localStorage.setItem(`${environment.refreshTokenString}`, response.refresh_token);
-          localStorage.setItem(`${environment.userString}`, JSON.stringify(response.user))
+          this.storageService.setUser(JSON.stringify(response.user));
+          this.storageService.setAccessToken(response.access_token);
+          this.storageService.setRefreshToken(response.refresh_token);
 
           this.isLoginFailed = false;
           this.isLoggedIn = true;

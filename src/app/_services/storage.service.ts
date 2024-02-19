@@ -8,20 +8,56 @@ export class StorageService {
   constructor() {}
 
   clean(): void {
-    localStorage.clear();
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(`${environment.userString}`);
+      localStorage.removeItem(`${environment.accessTokenString}`);
+      localStorage.removeItem(`${environment.refreshTokenString}`);
+      localStorage.clear();
+    }
   }
 
   public getUser(): any {
-    const user = localStorage.getItem(`${environment.userString}`);
-    if (user) {
-      return JSON.parse(user);
+    if (typeof window !== 'undefined') {
+      const user = localStorage.getItem(`${environment.userString}`);
+      if (user) {
+        return JSON.parse(user);
+      }
+      return {};
     }
-    return {};
   }
 
   public isLoggedIn(): boolean {
-    const user = localStorage.getItem(`${environment.userString}`);
-    return !!user;
+    if (typeof window !== 'undefined') {
+      const user = localStorage.getItem(`${environment.userString}`);
+      return !!user;
+    }
+    return false;
+  }
 
+
+  public setUser(response: string) {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(`${environment.userString}`, response)
+    }
+  }
+
+
+  public getAccessToken() {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('access-token')
+    }
+    return null;
+  }
+
+  setAccessToken(access_token: any) {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(`${environment.accessTokenString}`, access_token);
+    }
+  }
+
+  setRefreshToken(refresh_token: any) {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(`${environment.refreshTokenString}`, refresh_token);
+    }
   }
 }

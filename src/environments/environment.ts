@@ -1,9 +1,10 @@
+const url = 'https://learning-langs-07753c5e02eb.herokuapp.com';
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080',
-  authUrl: 'http://localhost:8080/api/v1/auth/',
-  wordUrl: 'http://localhost:8080/api/v1/word/',
-  userUrl: 'http://localhost:8080/api/v1/user/',
+  apiUrl: url,
+  authUrl: url + '/api/v1/auth',
+  wordUrl: url + '/api/v1/word',
+  userUrl: url + '/api/v1/user',
   accessTokenString: 'access-token',
   refreshTokenString: 'refresh-token',
   userString: 'current-user',

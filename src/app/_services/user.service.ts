@@ -14,6 +14,6 @@ export class UserService {
   }
 
   public save(user: User): Observable<User> {
-    return this.http.post<User>(URLS + 'save', user);
+    return this.http.post<User>(URLS + '/save', user);
   }
 }

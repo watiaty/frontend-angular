@@ -18,38 +18,38 @@ export class WordService {
   }
 
   public findUserWords(): Observable<Word[]> {
-    return this.http.get<Word[]>(URLS + 'my');
+    return this.http.get<Word[]>(URLS + '/my');
   }
 
   public findWordsForTraining(wordCount: String): Observable<Word[]> {
-    return this.http.get<Word[]>(URLS + 'train?count=' + wordCount);
+    return this.http.get<Word[]>(URLS + '/train?count=' + wordCount);
   }
 
   public findAll(): Observable<Word[]> {
-    return this.http.get<Word[]>(URLS + 'all');
+    return this.http.get<Word[]>(URLS + '/all');
   }
 
   public save(word: Word): Observable<Word> {
-    return this.http.post<Word>(URLS + 'add', word);
+    return this.http.post<Word>(URLS + '/add', word);
   }
 
   public addTranslation(id: String): Observable<Word> {
-    return this.http.post<Word>(URLS + 'translation/add', id);
+    return this.http.post<Word>(URLS + '/translation/add', id);
   }
 
   public deleteTranslation(id: String): Observable<Word> {
-    return this.http.post<Word>(URLS + 'translation/delete', id);
+    return this.http.post<Word>(URLS + '/translation/delete', id);
   }
 
   findWord(wordName: String) {
-    return this.http.get<WordInfo>("http://localhost:8080/api/v1/word" + '?word=' + wordName);
+    return this.http.get<WordInfo>(URLS + '?word=' + wordName);
   }
 
   addTranslationAndWord(id: String, translation: String) {
-    return this.http.post<Word>(URLS + 'translation/new', {id, translation});
+    return this.http.post<Word>(URLS + '/translation/new', {id, translation});
   }
 
     deleteTranslationFromWord(id: String) {
-      return this.http.post<Word>(URLS + 'translation/fulldelete', id);
+      return this.http.post<Word>(URLS + '/translation/fulldelete', id);
     }
 }

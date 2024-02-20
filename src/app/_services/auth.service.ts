@@ -14,7 +14,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(
-      URLS + 'signin',
+      URLS + '/signin',
       {
         username,
         password,
@@ -24,7 +24,7 @@ export class AuthService {
 
   register(username: string, firstname: string, lastname: string, password: string): Observable<any> {
     return this.http.post(
-      URLS + 'signup',
+      URLS + '/signup',
       {
         username,
         firstname,
@@ -36,6 +36,6 @@ export class AuthService {
 
   logout(): Observable<any> {
     this.storageService.clean();
-    return this.http.post(URLS + 'logout', { });
+    return this.http.post(URLS + '/logout', { });
   }
 }

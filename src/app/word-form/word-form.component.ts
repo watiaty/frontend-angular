@@ -10,12 +10,13 @@ import {WordService} from "../_services/word-service.service";
   styleUrls: ['./word-form.component.css']
 })
 export class WordFormComponent {
-
+  translationValue: String;
   word: Word;
 
   constructor(private router: Router, private wordService: WordService) {
     this.word = new Word();
     this.word.lang = "EN";
+    this.translationValue = "";
   }
 
   onSubmit() {
@@ -32,5 +33,19 @@ export class WordFormComponent {
 
   gotoUserList() {
     this.router.navigate(['/words']);
+  }
+
+  addTranslation() {
+    if (this.translationValue.trim()) {
+      // Проверяем, определен ли массив this.word.translations
+      if (!this.word.translations) {
+        // Если массив translations не определен, создаем новый массив
+        this.word.translations = [];
+      }
+      // Добавляем значение в массив translations
+      this.word.translations.push(this.translationValue.trim());
+      // Очищаем значение translationValue
+      this.translationValue = '';
+    }
   }
 }

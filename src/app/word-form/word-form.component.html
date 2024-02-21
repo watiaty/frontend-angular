@@ -1,43 +1,44 @@
 <div class="card my-5">
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-      <div class="form-group">
-        <label for="word">Word</label>
-        <input type="text" [(ngModel)]="word.word"
-               class="form-control"
-               id="word"
-               name="word"
-               placeholder="Enter your word"
-               required #name="ngModel">
+      <div class="mb-3 row">
+        <mat-form-field>
+          <mat-label>Word</mat-label>
+          <input matInput placeholder="Введите слово" [(ngModel)]="word.word" required #name="ngModel">
+        </mat-form-field>
       </div>
       <div [hidden]="!name.pristine" class="alert alert-danger">Word is required</div>
-      <div class="form-group">
-        <label for="language">Language</label>
-        <select id="language" name="lang" [(ngModel)]="word.lang" class="form-select d-inline">
-          <option value="EN">EN</option>
-          <option value="PL">PL</option>
-          <option value="RU">RU</option>
-        </select>
+      <div class="mb-3 row">
+        <mat-form-field>
+          <mat-label>Language</mat-label>
+          <mat-select [(ngModel)]="word.lang">
+            <mat-option value="EN">EN</mat-option>
+            <mat-option value="PL">PL</mat-option>
+            <mat-option value="RU">RU</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <div class="form-group">
-        <label for="translation">Translation</label>
-        <input type="text" [(ngModel)]="word.translations"
-               class="form-control"
-               id="translation"
-               name="translation"
-               placeholder="Enter translation"
-               required #translation="ngModel">
+      <div class="gap-2 d-flex justify-content-between">
+        <mat-form-field>
+          <mat-label>Translation</mat-label>
+          <input matInput placeholder="Введите слово" [(ngModel)]="translationValue">
+        </mat-form-field>
+        <button type="button" mat-stroked-button (click)="addTranslation()">add</button>
       </div>
-      <div class="form-group">
-        <label for="translation">transcription</label>
-        <input type="text" [(ngModel)]="word.transcription"
-               class="form-control"
-               id="transcription"
-               name="transcription"
-               placeholder="Enter translation"
-               required #translation="ngModel">
+      <ng-container *ngFor="let translation of word.translations">
+        <a mat-fab extended color="basic" class="me-3">
+          {{ translation }}
+          <mat-icon>delete</mat-icon>
+        </a>
+      </ng-container>
+      <div class="mb-3 row mt-3">
+        <mat-form-field>
+          <mat-label>Transcription</mat-label>
+          <input matInput placeholder="Введите слово" [(ngModel)]="word.transcription" required
+                 #transcription="ngModel">
+        </mat-form-field>
       </div>
-      <div [hidden]="!translation.pristine" class="alert alert-danger">Translation is required</div>
+      <div [hidden]="!transcription.pristine" class="alert alert-danger">Transcription is required</div>
       <button type="submit" [disabled]="!userForm.form.valid" class="btn btn-outline-dark float-right">Submit</button>
     </form>
   </div>

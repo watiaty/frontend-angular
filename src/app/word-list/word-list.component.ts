@@ -70,7 +70,17 @@ export class WordListComponent implements OnInit {
   }
 
   changeLanguage($event: MatSelectChange) {
-    console.log($event.value);
     this.selectedLang = $event.value;
+  }
+
+  delete(id: String) {
+    this.wordService.deleteUserWord(id).subscribe({
+      next: response => {
+        this.toggleMyWords();
+      },
+      error: error => {
+        console.error('Ошибка при сохранении', error);
+      }
+    });
   }
 }

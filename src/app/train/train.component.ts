@@ -37,6 +37,7 @@ export class TrainComponent {
 
   onInputKeyUp() {
     if (this.words[this.id].word === this.inputValue) {
+      if (!this.alertVisible) this.wordService.setStatusLearned(this.words[this.id].id).subscribe();
       this.alertVisible = false;
       this.translateVisible = false;
       this.id++;

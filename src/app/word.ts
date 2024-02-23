@@ -1,5 +1,5 @@
 export class Word {
-  id?: string;
+  id!: string;
   word: string = "";
   transcription?: string;
   hashtags?: String[];

@@ -57,4 +57,8 @@ export class WordService {
   deleteUserWord(id: String) {
     return this.http.post<Word>(URLS + '/delete', id);
   }
+
+  setStatusLearned(id: string) {
+    return this.http.post<Word>(URLS + '/update/learned', id);
+  }
 }

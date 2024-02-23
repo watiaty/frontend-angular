@@ -3,6 +3,7 @@ import {WordService} from "../_services/word-service.service";
 import {Word} from "../word";
 import {style} from "@angular/animations";
 import {max, min} from "rxjs";
+import {TrainRequest} from "../train-request";
 
 @Component({
   selector: 'app-train',
@@ -17,14 +18,16 @@ export class TrainComponent {
   inputValue: string = '';
   alertVisible: boolean = false;
   translateVisible: boolean = false;
+  trainRequest: TrainRequest;
 
   constructor(private wordService: WordService) {
     this.rangeValue = 10;
+    this.trainRequest = new TrainRequest();
   }
 
-  startTrain(wordCount: String) {
+  startTrain() {
     this.visible = false;
-    this.wordService.findWordsForTraining(wordCount).subscribe({
+    this.wordService.findWordsForTraining(this.trainRequest).subscribe({
         next: response => {
           this.words = response;
         }

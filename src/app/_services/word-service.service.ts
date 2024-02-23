@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Word} from "../word";
 import {environment} from "../../environments/environment";
 import {WordInfo} from "../word-info";
+import {TrainRequest} from "../train-request";
 
 
 const URLS = `${environment.wordUrl}`;
@@ -21,8 +22,8 @@ export class WordService {
     return this.http.get<Word[]>(URLS + '/my');
   }
 
-  public findWordsForTraining(wordCount: String): Observable<Word[]> {
-    return this.http.get<Word[]>(URLS + '/train?count=' + wordCount);
+  public findWordsForTraining(trainRequest: TrainRequest): Observable<Word[]> {
+    return this.http.post<Word[]>(URLS + '/train', trainRequest);
   }
 
   public findAll(): Observable<Word[]> {

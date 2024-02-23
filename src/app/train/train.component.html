@@ -7,9 +7,25 @@
         <label class="example-value-label">{{slider.value}}</label>
       </div>
       <mat-slider max="100" min="10" step="1">
-        <input matSliderThumb #slider>
+        <input matSliderThumb  [(ngModel)]="trainRequest.quantity" #slider="ngModel">
       </mat-slider>
-      <a type="button" mat-stroked-button class="btn btn-outline-dark" (click)="startTrain(slider.value)">Start</a>
+      <mat-form-field>
+        <mat-label>Language</mat-label>
+        <mat-select [(ngModel)]="trainRequest.language">
+          <mat-option value="EN">English</mat-option>
+          <mat-option value="PL">Polish</mat-option>
+          <mat-option value="RU">Russian</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Language</mat-label>
+        <mat-select [(ngModel)]="trainRequest.status">
+          <mat-option value="LEARNING">Learning</mat-option>
+          <mat-option value="LEARNED">Learned</mat-option>
+          <mat-option value="ALL">All</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <a type="button" mat-stroked-button class="btn btn-outline-dark" (click)="startTrain()">Start</a>
     </ng-container>
     <ng-container *ngIf="!visible">
       <label class="text-white">{{ id }} / {{ words.length }}</label>

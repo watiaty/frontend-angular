@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   currentUser: any;
 
-  constructor(private authService: AuthService, private storageService: StorageService) { }
+  constructor(private authService: AuthService, private storageService: StorageService) {
+  }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -27,8 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, password } = this.form;
-
+    const {username, password} = this.form;
     this.authService.login(username, password).subscribe({
       next: response => {
         if (response) {
@@ -41,7 +41,11 @@ export class LoginComponent implements OnInit {
         }
       },
       error: err => {
-        this.errorMessage = err.error.message;
+        if (err.status === 401) {
+          this.errorMessage = err.error.error;
+        } else {
+          this.errorMessage = err.error;
+        }
         this.isLoginFailed = true;
       }
     });

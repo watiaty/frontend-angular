@@ -20,6 +20,7 @@ export class RegisterComponent {
   constructor(private authService: AuthService) { }
 
   onSubmit(): void {
+    console.log('Value of form.username:', this.form.username);
     const { username, firstname, lastname, password } = this.form;
 
     this.authService.register(username, firstname, lastname, password).subscribe({
@@ -29,7 +30,9 @@ export class RegisterComponent {
         this.isSignUpFailed = false;
       },
       error: err => {
-        this.errorMessage = err.error.message;
+        if (err.status === 409) {
+          this.errorMessage = err.error.error;
+        }
         this.isSignUpFailed = true;
       }
     });

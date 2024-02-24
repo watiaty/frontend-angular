@@ -1,4 +1,4 @@
-const url = 'https://learning-langs-07753c5e02eb.herokuapp.com';
+const url = 'http://localhost:8080';
 export const environment = {
   production: false,
   apiUrl: url,

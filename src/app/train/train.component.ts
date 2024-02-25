@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import {WordService} from "../_services/word-service.service";
 import {Word} from "../word";
-import {style} from "@angular/animations";
-import {max, min} from "rxjs";
 import {TrainRequest} from "../train-request";
 
 @Component({

@@ -3,8 +3,7 @@ import {AuthService} from "../_services/auth.service";
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent {
   form: any = {

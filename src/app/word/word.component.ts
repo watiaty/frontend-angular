@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {WordService} from "../_services/word-service.service";
 import {WordInfo} from "../word-info";
 import {StorageService} from "../_services/storage.service";
 
 @Component({
   selector: 'app-word',
-  templateUrl: './word.component.html',
-  styleUrl: './word.component.css'
+  templateUrl: './word.component.html'
 })
 export class WordComponent implements OnInit {
   wordName: String = "";

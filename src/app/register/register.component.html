@@ -1,27 +1,24 @@
 <div class="card my-5">
   <div class="card-body d-flex justify-content-center">
     <ng-container *ngIf="!isSuccessful">
-      <form style="width: 50%" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate style="width: 70%">
         <mat-form-field style="width: 100%">
           <mat-label>Username</mat-label>
-          <input matInput name="username" [(ngModel)]="form.username" required minlength="3" maxlength="20"
-                 #username="ngModel">
+          <input matInput name="username" [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel">
           <mat-error *ngIf="username.errors?.['required']">Username is required</mat-error>
           <mat-error *ngIf="username.errors?.['minlength']">Username must be at least 3 characters</mat-error>
           <mat-error *ngIf="username.errors?.['maxlength']">Username must be at most 20 characters</mat-error>
         </mat-form-field>
         <mat-form-field style="width: 100%">
           <mat-label>First name</mat-label>
-          <input matInput name="firstname" [(ngModel)]="form.firstname" required minlength="3" maxlength="20"
-                 #firstname="ngModel">
+          <input matInput name="firstname" [(ngModel)]="form.firstname" required minlength="3" maxlength="20" #firstname="ngModel">
           <mat-error *ngIf="firstname.errors?.['required']">First name is required</mat-error>
           <mat-error *ngIf="firstname.errors?.['minlength']">First name must be at least 3 characters</mat-error>
           <mat-error *ngIf="firstname.errors?.['maxlength']">First name must be at most 20 characters</mat-error>
         </mat-form-field>
         <mat-form-field style="width: 100%">
           <mat-label>Last name</mat-label>
-          <input matInput name="lastname" [(ngModel)]="form.lastname" required minlength="3" maxlength="20"
-                 #lastname="ngModel">
+          <input matInput name="lastname" [(ngModel)]="form.lastname" required minlength="3" maxlength="20" #lastname="ngModel">
           <mat-error *ngIf="lastname.errors?.['required']">Last name is required</mat-error>
           <mat-error *ngIf="lastname.errors?.['minlength']">Last name must be at least 3 characters</mat-error>
           <mat-error *ngIf="lastname.errors?.['maxlength']">Last name must be at most 20 characters</mat-error>
@@ -34,7 +31,7 @@
           <mat-error *ngIf="password.errors?.['minlength']">Password must be at least 6 characters</mat-error>
           <mat-error *ngIf="password.errors?.['maxlength']">Password must be at most 20 characters</mat-error>
         </mat-form-field>
-        <button mat-stroked-button style="width: 100%">Log in</button>
+        <button mat-stroked-button style="width: 100%">Sign up</button>
         <ng-container *ngIf="f.submitted && isSignUpFailed">
           <div class="alert alert-warning mt-3" style="width: 100%">Signup failed!<br/>{{ errorMessage }}</div>
         </ng-container>

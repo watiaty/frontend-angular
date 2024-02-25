@@ -6,8 +6,7 @@ import {WordService} from "../_services/word-service.service";
 
 @Component({
   selector: 'app-user-form',
-  templateUrl: './word-form.component.html',
-  styleUrls: ['./word-form.component.css']
+  templateUrl: './word-form.component.html'
 })
 export class WordFormComponent {
   translationValue: String;

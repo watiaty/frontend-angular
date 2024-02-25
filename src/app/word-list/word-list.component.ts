@@ -9,8 +9,7 @@ import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: 'app-user-list',
-  templateUrl: './word-list.component.html',
-  styleUrls: ['./word-list.component.css']
+  templateUrl: './word-list.component.html'
 })
 export class WordListComponent implements OnInit {
   searchText = new FormControl();

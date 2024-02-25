@@ -1,7 +1,7 @@
 <div class="card my-5">
   <div class="card-body d-flex justify-content-center">
     <ng-container *ngIf="!isLoggedIn">
-      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate style="width: 70%">
         <mat-form-field style="width: 100%">
           <mat-label>Username</mat-label>
           <input matInput name="username" [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel">

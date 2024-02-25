@@ -5,7 +5,5 @@ export class User {
   nativeLang: string = "";
   learningLangs: string[] = [];
 
-  constructor() {
-
-  }
+  constructor() {}
 }

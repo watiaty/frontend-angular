@@ -19,7 +19,6 @@ const routes: Routes = [
   {path: 'train', component: TrainComponent},
   {path: 'search', component: HomeComponent},
   {path: '', component: HomeComponent}
-  // {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 @NgModule({

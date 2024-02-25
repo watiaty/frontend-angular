@@ -46,6 +46,10 @@ export class WordService {
     return this.http.get<WordInfo>(URLS + '?word=' + wordName);
   }
 
+  searchWords(searchText: String, lang: String) {
+    return this.http.get<WordInfo[]>(URLS + '/search?word=' + searchText + "&lang=" + lang);
+  }
+
   addTranslationAndWord(id: String, translation: String) {
     return this.http.post<Word>(URLS + '/translation/new', {id, translation});
   }

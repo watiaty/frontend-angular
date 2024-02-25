@@ -7,6 +7,7 @@ import {RegisterComponent} from "./register/register.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {WordComponent} from "./word/word.component";
 import {TrainComponent} from "./train/train.component";
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
   {path: 'words', component: WordListComponent},
@@ -16,7 +17,9 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'word', component: WordComponent},
   {path: 'train', component: TrainComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'}
+  {path: 'search', component: HomeComponent},
+  {path: '', component: HomeComponent}
+  // {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 @NgModule({

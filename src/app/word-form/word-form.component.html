@@ -7,28 +7,32 @@
       </mat-form-field>
       <mat-form-field style="width: 100%">
         <mat-label>Language</mat-label>
-        <mat-select [(ngModel)]="word.lang">
-          <mat-option value="EN">EN</mat-option>
-          <mat-option value="PL">PL</mat-option>
-          <mat-option value="RU">RU</mat-option>
+        <mat-select [(value)]="word.lang" (selectionChange)="changeLanguage($event)">
+          <mat-option *ngFor="let language of langs" [value]="language">{{ language }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field style="width: 100%">
-        <mat-label>Translation</mat-label>
-        <input matInput placeholder="Введите слово" [(ngModel)]="translationValue">
+        <mat-label>Translations</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Enter fruits">
+            <mat-chip *ngFor="let translation of word.translations" (removed)="remove(translation)">
+              {{ translation }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          <input placeholder="New translation..."
+                 [matChipInputFor]="chipGrid"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)"/>
+        </mat-chip-grid>
       </mat-form-field>
-      <button mat-stroked-button type="button" (click)="addTranslation()">add</button>
-      <ng-container *ngFor="let translation of word.translations">
-        <a mat-fab extended color="basic" class="me-3">
-          {{ translation }}
-          <mat-icon>delete</mat-icon>
-        </a>
-      </ng-container>
       <mat-form-field style="width: 100%">
         <mat-label>Transcription</mat-label>
         <input matInput placeholder="Введите слово" [(ngModel)]="word.transcription" required>
       </mat-form-field>
       <button mat-stroked-button type="submit" [disabled]="!userForm.form.valid">Submit</button>
+      <ng-container *ngIf="isWordAdded">
+        <div class="alert alert-success" style="width: 100%">Word was successfully added</div>
+      </ng-container>
     </form>
   </div>
 </div>

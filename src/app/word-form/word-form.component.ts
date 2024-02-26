@@ -1,50 +1,78 @@
-import {Component} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Word} from "../word";
 import {WordService} from "../_services/word-service.service";
+import {LiveAnnouncer} from "@angular/cdk/a11y";
+import {COMMA, ENTER} from "@angular/cdk/keycodes";
+import {MatChipInputEvent} from "@angular/material/chips";
+import {StorageService} from "../_services/storage.service";
+import {MatSelectChange} from "@angular/material/select";
 
 
 @Component({
   selector: 'app-user-form',
-  templateUrl: './word-form.component.html'
+  templateUrl: './word-form.component.html',
 })
-export class WordFormComponent {
-  translationValue: String;
+export class WordFormComponent implements OnInit {
   word: Word;
+  addOnBlur = true;
+  langs!: string[];
+  currentUser: any;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  constructor(private router: Router, private wordService: WordService) {
+  announcer = inject(LiveAnnouncer);
+  isWordAdded: any = false;
+
+  constructor(private router: Router, private wordService: WordService, public storageService: StorageService) {
     this.word = new Word();
-    this.word.lang = "EN";
-    this.translationValue = "";
+    this.currentUser = this.storageService.getUser();
+    this.langs = this.currentUser.learningLang;
+    if (this.langs.length > 0) {
+      this.word.lang = this.langs[0];
+    }
+  }
+
+  ngOnInit(): void {
+    this.word.translations = [];
   }
 
   onSubmit() {
-    this.wordService.save(this.word).subscribe(
-      response => {
-        console.log('Сохранено успешно', response);
-        this.gotoUserList();
+    this.wordService.save(this.word).subscribe({
+      next: response => {
+        if (response) {
+          console.log('Сохранено успешно', response);
+          // this.gotoUserList();
+          this.isWordAdded = true;
+          this.word = new Word();
+        }
       },
-      error => {
-        console.error('Ошибка при сохранении', error);
+      error: err => {
+        console.error('Ошибка при сохранении' + err);
       }
-    );
+    });
   }
 
   gotoUserList() {
     this.router.navigate(['/words']);
   }
 
-  addTranslation() {
-    if (this.translationValue.trim()) {
-      // Проверяем, определен ли массив this.word.translations
-      if (!this.word.translations) {
-        // Если массив translations не определен, создаем новый массив
-        this.word.translations = [];
-      }
-      // Добавляем значение в массив translations
-      this.word.translations.push(this.translationValue.trim());
-      // Очищаем значение translationValue
-      this.translationValue = '';
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+    if (value) {
+      this.word.translations.push(value);
     }
+    event.chipInput!.clear();
+  }
+
+  remove(translation: String): void {
+    const index = this.word.translations.indexOf(translation);
+    if (index >= 0) {
+      this.word.translations.splice(index, 1);
+      this.announcer.announce(`Removed ${translation}`);
+    }
+  }
+
+  changeLanguage($event: MatSelectChange) {
+    this.word.lang = $event.value;
   }
 }

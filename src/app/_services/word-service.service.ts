@@ -30,7 +30,7 @@ export class WordService {
     return this.http.get<Word[]>(URLS + '/all');
   }
 
-  public save(word: Word): Observable<Word> {
+  public save(word: Word): Observable<any> {
     return this.http.post<Word>(URLS + '/add', word);
   }
 

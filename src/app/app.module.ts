@@ -47,6 +47,7 @@ import { HomeComponent } from './home/home.component';
 import {MatList, MatListItem, MatListItemLine, MatListItemTitle} from "@angular/material/list";
 import {MatDivider} from "@angular/material/divider";
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
+import {MatChip, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow} from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -108,7 +109,12 @@ import {MatGridList, MatGridTile} from "@angular/material/grid-list";
     MatList,
     MatDivider,
     MatGridList,
-    MatGridTile
+    MatGridTile,
+    MatChipGrid,
+    MatChipInput,
+    MatChipRow,
+    MatChipRemove,
+    MatChip
   ],
   providers: [
     {

@@ -3,6 +3,6 @@ export class Word {
   word: string = "";
   transcription?: string;
   hashtags?: String[];
-  translations?: String[];
+  translations!: String[];
   lang?: String;
 }

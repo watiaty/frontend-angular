@@ -31,7 +31,7 @@ import {
   MatHeaderCell,
   MatHeaderCellDef,
   MatHeaderRow,
-  MatHeaderRowDef,
+  MatHeaderRowDef, MatNoDataRow,
   MatRow,
   MatRowDef,
   MatTable
@@ -48,6 +48,7 @@ import {MatList, MatListItem, MatListItemLine, MatListItemTitle} from "@angular/
 import {MatDivider} from "@angular/material/divider";
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import {MatChip, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow} from "@angular/material/chips";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -114,7 +115,11 @@ import {MatChip, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow} from "@an
     MatChipInput,
     MatChipRow,
     MatChipRemove,
-    MatChip
+    MatChip,
+    MatNoDataRow,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem
   ],
   providers: [
     {

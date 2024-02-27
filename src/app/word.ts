@@ -4,5 +4,6 @@ export class Word {
   transcription?: string;
   hashtags?: String[];
   translations!: String[];
+  status: boolean = true;
   lang?: String;
 }

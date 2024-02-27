@@ -1,85 +1,74 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Word } from "../word";
 import { WordService } from "../_services/word-service.service";
-import { map, Observable, startWith } from "rxjs";
-import { FormControl } from "@angular/forms";
 import { MatSelectChange } from "@angular/material/select";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { StorageService } from "../_services/storage.service";
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './word-list.component.html'
 })
 export class WordListComponent implements OnInit {
-  searchText = new FormControl();
   words: Word[] = [];
-  myWords: Word[] = [];
   selectedLang: any;
-  visible: String = "words";
-  filteredWords: Observable<Word[]>;
+  selectedStatus: boolean;
+  langs!: string[];
+  currentUser: any;
   dataSource!: MatTableDataSource<any>;
-
-  constructor(private wordService: WordService) {
-    this.filteredWords = this.searchText.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
-    this.selectedLang = "EN";
-  }
+  displayedColumns: string[] = ['word', 'transcription', 'translations', 'star'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  private _filter(value: string): Word[] {
-    const filterValue = value.toLowerCase();
-    return this.words.filter(word => word.word.toLowerCase().startsWith(filterValue)).slice(0, 5);
+  constructor(private wordService: WordService, public storageService: StorageService) {
+    this.currentUser = this.storageService.getUser();
+    this.langs = this.currentUser.learningLang;
+    if (this.langs.length > 0) {
+      this.selectedLang = this.langs[0];
+    }
+    this.selectedStatus = true;
   }
 
   ngOnInit() {
-    this.wordService.findAll().subscribe(response => {
-      this.words = response;
-      this.dataSource = new MatTableDataSource(this.words);
-      this.dataSource.paginator = this.paginator;
-      this.loadWords();
-    });
-  }
-
-  loadWords() {
-    this.filteredWords = this.searchText.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
-  }
-
-  toggleWords() {
-    this.dataSource = new MatTableDataSource(this.words);
-    this.dataSource.paginator = this.paginator;
-    this.visible = "words";
-  }
-
-  toggleMyWords() {
-    this.wordService.findUserWords().subscribe({
-      next: response => {
-        this.myWords = response;
-        this.dataSource = new MatTableDataSource(this.myWords);
-        this.dataSource.paginator = this.paginator;
-      }
-    });
-    this.visible = "mywords";
+    this.loadWords();
   }
 
   changeLanguage($event: MatSelectChange) {
     this.selectedLang = $event.value;
+    this.updateDataSource();
+  }
+
+  changeStatus(status: boolean) {
+    this.selectedStatus = status;
+    this.updateDataSource();
   }
 
   delete(id: String) {
     this.wordService.deleteUserWord(id).subscribe({
       next: response => {
-        this.toggleMyWords();
+        this.loadWords();
       },
       error: error => {
         console.error('Ошибка при сохранении', error);
       }
+    });
+  }
+
+  updateDataSource() {
+    this.dataSource = new MatTableDataSource(this.words.filter(word => word.lang === this.selectedLang && word.status === this.selectedStatus));
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  loadWords() {
+    this.wordService.findUserWords().subscribe(response => {
+      this.words = response;
+      this.updateDataSource();
     });
   }
 }

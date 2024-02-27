@@ -21,7 +21,7 @@ import {
 import {MatFormField, MatInput, MatInputModule} from "@angular/material/input";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
-import {MatAnchor, MatButton, MatFabAnchor, MatFabButton, MatIconButton} from "@angular/material/button";
+import {MatAnchor, MatButton, MatFabAnchor, MatFabButton, MatIconAnchor, MatIconButton} from "@angular/material/button";
 import {MatSelect} from "@angular/material/select";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
@@ -47,8 +47,12 @@ import { HomeComponent } from './home/home.component';
 import {MatList, MatListItem, MatListItemLine, MatListItemTitle} from "@angular/material/list";
 import {MatDivider} from "@angular/material/divider";
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
-import {MatChip, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow} from "@angular/material/chips";
+import {MatChip, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow, MatChipSet} from "@angular/material/chips";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
+import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -119,7 +123,15 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
     MatNoDataRow,
     MatMenuTrigger,
     MatMenu,
-    MatMenuItem
+    MatMenuItem,
+    MatIconAnchor,
+    MatButtonModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatChipSet
   ],
   providers: [
     {

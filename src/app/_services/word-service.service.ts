@@ -54,9 +54,9 @@ export class WordService {
     return this.http.post<Word>(URLS + '/translation/new', {id, translation});
   }
 
-    deleteTranslationFromWord(id: String) {
-      return this.http.post<Word>(URLS + '/translation/fulldelete', id);
-    }
+  deleteTranslationFromWord(id: String) {
+    return this.http.post<Word>(URLS + '/translation/fulldelete', id);
+  }
 
   deleteUserWord(id: String) {
     return this.http.post<Word>(URLS + '/delete', id);

@@ -26,12 +26,23 @@
     <ng-container *ngIf="isLoggedIn">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="profile">{{ username }}</a>
-        </li>
-        <li class="nav-item">
-          <a href="/" class="nav-link" (click)="logout()">Logout</a>
+          <a type="button" mat-menu-item class="nav-link" [matMenuTriggerFor]="profile">
+            <span>{{ username }}</span>
+            <mat-icon>menu</mat-icon>
+          </a>
         </li>
       </ul>
+      <mat-menu #profile="matMenu">
+        <button mat-menu-item routerLink="profile">
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
     </ng-container>
   </div>
 </nav>

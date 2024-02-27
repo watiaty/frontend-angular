@@ -1,58 +1,45 @@
 import {NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
-import {WordListComponent} from "./word-list/word-list.component";
-import {WordFormComponent} from "./word-form/word-form.component";
-import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "./app-routing.module";
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserModule} from "@angular/platform-browser";
+import {WordListComponent} from "./word-list/word-list.component";
+import {WordFormComponent} from "./word-form/word-form.component";
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {ProfileComponent} from './profile/profile.component';
 import {HttpRequestInterceptor} from "./_helpers/http.interceptor";
 import {WordComponent} from './word/word.component';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
-import {
-  MatAutocomplete,
-  MatAutocompleteModule,
-  MatAutocompleteTrigger,
-  MatOption
-} from "@angular/material/autocomplete";
-import {MatFormField, MatInput, MatInputModule} from "@angular/material/input";
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {TrainComponent} from "./train/train.component";
+import { HomeComponent } from './home/home.component';
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
-import {MatAnchor, MatButton, MatFabAnchor, MatFabButton, MatIconAnchor, MatIconButton} from "@angular/material/button";
-import {MatSelect} from "@angular/material/select";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatInput, MatInputModule} from "@angular/material/input";
 import {
   MatCell,
   MatCellDef,
   MatColumnDef,
   MatHeaderCell,
   MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef, MatNoDataRow,
-  MatRow,
-  MatRowDef,
+  MatHeaderRow, MatHeaderRowDef, MatNoDataRow, MatRow, MatRowDef,
   MatTable
 } from "@angular/material/table";
-import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
-import {TrainComponent} from "./train/train.component";
-import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatAnchor, MatButton, MatFabAnchor, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
-import {MatSlider, MatSliderThumb} from "@angular/material/slider";
-import {MatCard, MatCardContent} from "@angular/material/card";
-import {MatToolbar} from "@angular/material/toolbar";
-import { HomeComponent } from './home/home.component';
-import {MatList, MatListItem, MatListItemLine, MatListItemTitle} from "@angular/material/list";
-import {MatDivider} from "@angular/material/divider";
-import {MatGridList, MatGridTile} from "@angular/material/grid-list";
-import {MatChip, MatChipGrid, MatChipInput, MatChipRemove, MatChipRow, MatChipSet} from "@angular/material/chips";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
-import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import {MatPaginator} from "@angular/material/paginator";
+import {NgForOf, NgIf, NgSwitch} from "@angular/common";
+import {MatChip, MatChipGrid, MatChipInput, MatChipSet} from "@angular/material/chips";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSlider, MatSliderThumb} from "@angular/material/slider";
+import {MatAccordion, MatExpansionPanel, MatExpansionPanelTitle, MatExpansionModule} from "@angular/material/expansion";
+import {MatList, MatListItem} from "@angular/material/list";
+import {MatDivider} from "@angular/material/divider";
+import {RouterLink, RouterOutlet} from "@angular/router";
+import {MatChipsModule} from '@angular/material/chips';
+
 
 @NgModule({
   declarations: [
@@ -67,71 +54,58 @@ import {MatButtonModule} from '@angular/material/button';
     HomeComponent
   ],
   imports: [
+    MatChipsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    MatAutocomplete,
-    MatOption,
-    MatPaginatorModule,
-    MatAutocompleteTrigger,
-    MatAutocompleteModule,
-    MatInput,
-    ReactiveFormsModule,
     MatFormField,
     MatInputModule,
-    MatFormFieldModule,
-    MatSlideToggleModule,
+    MatExpansionModule,
+    MatSelect,
+    MatOption,
     MatButtonToggleGroup,
     MatButtonToggle,
-    MatAnchor,
-    MatSelect,
-    BrowserAnimationsModule,
+    MatInput,
     MatTable,
-    MatHeaderRow,
-    MatRow,
     MatColumnDef,
     MatHeaderCell,
     MatCell,
-    MatRowDef,
-    MatHeaderRowDef,
-    MatCellDef,
     MatHeaderCellDef,
-    MatPaginator,
-    MatIcon,
+    MatCellDef,
     MatIconButton,
-    MatFabButton,
-    MatButton,
-    MatSlider,
-    MatSliderThumb,
-    MatCardContent,
-    MatCard,
-    MatFabAnchor,
-    MatToolbar,
-    MatListItemLine,
-    MatListItemTitle,
-    MatListItem,
-    MatList,
-    MatDivider,
-    MatGridList,
-    MatGridTile,
-    MatChipGrid,
-    MatChipInput,
-    MatChipRow,
-    MatChipRemove,
-    MatChip,
-    MatNoDataRow,
+    MatIcon,
     MatMenuTrigger,
     MatMenu,
     MatMenuItem,
-    MatIconAnchor,
-    MatButtonModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatChipSet
+    MatHeaderRow,
+    MatRow,
+    MatPaginator,
+    MatHeaderRowDef,
+    MatRowDef,
+    MatNoDataRow,
+    NgForOf,
+    MatChipGrid,
+    MatChip,
+    FormsModule,
+    MatChipInput,
+    MatButton,
+    NgSwitch,
+    MatAnchor,
+    MatFabAnchor,
+    MatLabel,
+    MatSliderThumb,
+    MatSlider,
+    NgIf,
+    MatChipSet,
+    ReactiveFormsModule,
+    MatExpansionPanel,
+    MatExpansionPanelTitle,
+    MatAccordion,
+    MatListItem,
+    MatList,
+    MatDivider,
+    RouterOutlet,
+    RouterLink
   ],
   providers: [
     {

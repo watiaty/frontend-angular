@@ -17,7 +17,6 @@ export class TrainComponent {
   id: number = 0;
   langs!: string[];
   currentUser: any;
-  selectedLang: any;
   inputValue: string = '';
   alertVisible: boolean = false;
   translateVisible: boolean = false;
@@ -26,12 +25,12 @@ export class TrainComponent {
   constructor(private wordService: WordService, private storageService : StorageService) {
     this.currentUser = this.storageService.getUser();
     this.langs = this.currentUser.learningLang;
-    if (this.langs.length > 0) {
-      this.selectedLang = this.langs[0];
-    }
     this.rangeValue = 10;
     this.trainRequest = new TrainRequest();
     this.trainRequest.status = 'LEARNING';
+    if (this.langs.length > 0) {
+      this.trainRequest.language = this.langs[0];
+    }
   }
 
   startTrain() {
@@ -61,6 +60,6 @@ export class TrainComponent {
   }
 
   changeLanguage($event: MatSelectChange) {
-    this.selectedLang = $event.value;
+    this.trainRequest.language = $event.value;
   }
 }

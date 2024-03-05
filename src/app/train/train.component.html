@@ -11,7 +11,7 @@
       </mat-slider>
       <mat-form-field>
         <mat-label>Language</mat-label>
-        <mat-select [(value)]="selectedLang" (selectionChange)="changeLanguage($event)">
+        <mat-select [(value)]="trainRequest.language" (selectionChange)="changeLanguage($event)">
           <mat-option *ngFor="let language of langs" [value]="language">{{ language }}</mat-option>
         </mat-select>
       </mat-form-field>

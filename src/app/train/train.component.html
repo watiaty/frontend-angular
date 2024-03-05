@@ -11,14 +11,12 @@
       </mat-slider>
       <mat-form-field>
         <mat-label>Language</mat-label>
-        <mat-select [(ngModel)]="trainRequest.language">
-          <mat-option value="EN">English</mat-option>
-          <mat-option value="PL">Polish</mat-option>
-          <mat-option value="RU">Russian</mat-option>
+        <mat-select [(value)]="selectedLang" (selectionChange)="changeLanguage($event)">
+          <mat-option *ngFor="let language of langs" [value]="language">{{ language }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Language</mat-label>
+        <mat-label>Status</mat-label>
         <mat-select [(ngModel)]="trainRequest.status">
           <mat-option value="LEARNING">Learning</mat-option>
           <mat-option value="LEARNED">Learned</mat-option>

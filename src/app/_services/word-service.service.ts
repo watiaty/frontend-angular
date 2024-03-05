@@ -65,4 +65,8 @@ export class WordService {
   setStatusLearned(id: string) {
     return this.http.post<Word>(URLS + '/update/learned', id);
   }
+
+  setStatusLearning(id: string) {
+    return this.http.post<Word>(URLS + '/update/learning', id);
+  }
 }

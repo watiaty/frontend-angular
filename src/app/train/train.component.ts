@@ -21,6 +21,7 @@ export class TrainComponent {
   alertVisible: boolean = false;
   translateVisible: boolean = false;
   trainRequest: TrainRequest;
+  checked = false;
 
   constructor(private wordService: WordService, private storageService : StorageService) {
     this.currentUser = this.storageService.getUser();
@@ -35,6 +36,7 @@ export class TrainComponent {
 
   startTrain() {
     this.visible = false;
+    if (this.checked) this.trainRequest.quantity = 0;
     this.wordService.findWordsForTraining(this.trainRequest).subscribe({
         next: response => {
           this.words = response;

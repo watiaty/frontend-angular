@@ -6,9 +6,12 @@
         <label id="example-name-label" class="example-name-label">Value</label>
         <label class="example-value-label">{{slider.value}}</label>
       </div>
-      <mat-slider max="100" min="10" step="1">
+      <mat-slider max="100" min="10" step="1" [disabled]="checked">
         <input matSliderThumb  [(ngModel)]="trainRequest.quantity" #slider="ngModel">
       </mat-slider>
+      <section>
+        <mat-checkbox [(ngModel)]="checked">All</mat-checkbox>
+      </section>
       <mat-form-field>
         <mat-label>Language</mat-label>
         <mat-select [(value)]="trainRequest.language" (selectionChange)="changeLanguage($event)">

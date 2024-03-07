@@ -56,7 +56,7 @@ export class WordListComponent implements OnInit {
   }
 
   updateDataSource() {
-    this.dataSource = new MatTableDataSource(this.words.filter(word => word.lang === this.selectedLang && word.status === this.selectedStatus));
+    this.dataSource = new MatTableDataSource(this.words.filter(word => word.lang === this.selectedLang));
     this.dataSource.paginator = this.paginator;
   }
 

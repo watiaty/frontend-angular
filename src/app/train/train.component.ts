@@ -28,7 +28,6 @@ export class TrainComponent {
     this.langs = this.currentUser.learningLang;
     this.rangeValue = 10;
     this.trainRequest = new TrainRequest();
-    this.trainRequest.status = 'LEARNING';
     if (this.langs.length > 0) {
       this.trainRequest.language = this.langs[0];
     }

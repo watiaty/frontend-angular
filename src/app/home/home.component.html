@@ -13,7 +13,7 @@
     <mat-list *ngFor="let word of words">
       <mat-list-item>
         <img src="assets/flags/{{word.language.toLocaleLowerCase()}}.jpg" alt="language" style="width: 20px">
-        <a [routerLink]="['/word']" [queryParams]="{ data: word.word }"> {{ word.word }}</a>
+        <a [routerLink]="['/word']" [queryParams]="{ data: word.word, lang: word.language }"> {{ word.word }}</a>
         <ng-container *ngFor="let translation of word.translations; let last = last">
           {{ translation.translation }}{{ !last ? ', ' : '' }}
         </ng-container>

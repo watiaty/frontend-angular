@@ -10,6 +10,7 @@ import {StorageService} from "../_services/storage.service";
 })
 export class WordComponent implements OnInit {
   wordName: String = "";
+  wordLang: String = "";
   word: WordInfo;
   valueTranslation: String = "";
   speechSynthesis = window.speechSynthesis;
@@ -23,13 +24,14 @@ export class WordComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.wordName = params['data'];
+      this.wordLang = params['lang'];
     });
-    this.getWord(this.wordName);
+    this.getWord(this.wordName, this.wordLang);
     this.role = this.storageService.getUser().role;
   }
 
-  getWord(word: String) {
-    this.wordService.findWord(word).subscribe({
+  getWord(word: String, lang: String) {
+    this.wordService.findWord(word, lang).subscribe({
         next: response => {
           this.word = new WordInfo(response.id, response.word, response.transcription, response.language, response.translations, response.hashtags);
         }
@@ -40,7 +42,7 @@ export class WordComponent implements OnInit {
   delete(id: String) {
     this.wordService.deleteTranslation(id).subscribe({
       next: response => {
-        this.getWord(this.wordName);
+        this.getWord(this.wordName, this.wordLang);
       },
       error: error => {
         console.error('Ошибка при сохранении', error);
@@ -51,7 +53,7 @@ export class WordComponent implements OnInit {
   add(id: String) {
     this.wordService.addTranslation(id).subscribe({
       next: response => {
-        this.getWord(this.wordName);
+        this.getWord(this.wordName, this.wordLang);
       },
       error: error => {
         console.error('Ошибка при сохранении', error);
@@ -72,7 +74,7 @@ export class WordComponent implements OnInit {
   onInputKeyUp() {
     this.wordService.addTranslationAndWord(this.word.id, this.valueTranslation).subscribe({
       next: response => {
-        this.getWord(this.wordName);
+        this.getWord(this.wordName, this.wordLang);
       },
       error: error => {
         console.error('Ошибка при сохранении', error);
@@ -83,7 +85,7 @@ export class WordComponent implements OnInit {
   deleteForever(id: String) {
     this.wordService.deleteTranslationFromWord(id).subscribe({
       next: response => {
-        this.getWord(this.wordName);
+        this.getWord(this.wordName, this.wordLang);
       },
       error: error => {
         console.error('Ошибка при сохранении', error);

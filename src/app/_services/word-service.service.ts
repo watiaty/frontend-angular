@@ -42,8 +42,8 @@ export class WordService {
     return this.http.post<Word>(URLS + '/translation/delete', id);
   }
 
-  findWord(wordName: String) {
-    return this.http.get<WordInfo>(URLS + '?word=' + wordName);
+  findWord(wordName: String, wordLang: String) {
+    return this.http.get<WordInfo>(URLS + '?word=' + wordName + "&lang=" + wordLang);
   }
 
   searchWords(searchText: String) {

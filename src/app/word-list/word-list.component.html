@@ -28,7 +28,7 @@
       <ng-container matColumnDef="word">
         <th mat-header-cell *matHeaderCellDef> Word</th>
         <td mat-cell *matCellDef="let word">
-          <a [routerLink]="['/word']" [queryParams]="{ data: word.word }">{{ word.word }}</a>
+          <a [routerLink]="['/word']" [queryParams]="{ data: word.word, lang: word.lang }">{{ word.word }}</a>
         </td>
       </ng-container>
       <ng-container matColumnDef="transcription">

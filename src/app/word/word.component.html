@@ -8,7 +8,7 @@
     </div>
     <h1>{{ word.word }}
       <ng-container [ngSwitch]="word.language">
-<!--        <img *ngSwitchCase="'Polish'" src="path_to_polish_flag_image" alt="Polish Flag">-->
+        <img *ngSwitchCase="'Polish'" src="assets/flags/polish.jpg" width="32px" alt="Polish Flag">
 <!--        <img *ngSwitchCase="'Russian'" src="path_to_russian_flag_image" alt="Russian Flag">-->
         <img *ngSwitchCase="'English'" src="assets/flags/english.jpg" width="32px" alt="English Flag">
       </ng-container>
@@ -31,7 +31,7 @@
             <ng-container *ngIf="translation.user">
               <p>
                 <a mat-fab extended color="basic" class="me-3" (click)="delete(translation.id)">
-                  {{ translation.translation }}
+                  {{ translation.translation }} | {{ translation.quantity }}
                   <mat-icon>close</mat-icon>
                 </a>
               </p>
@@ -46,7 +46,7 @@
             <ng-container *ngIf="!translation.user">
               <p>
                 <a mat-fab extended color="basic" class="me-3" (click)="add(translation.id)">
-                  {{ translation.translation }}
+                  {{ translation.translation }} | {{ translation.quantity }}
                   <mat-icon>add</mat-icon>
                 </a>
                 @if (role == 'ADMIN') {

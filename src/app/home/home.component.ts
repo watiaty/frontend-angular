@@ -3,7 +3,6 @@ import {FormControl} from "@angular/forms";
 import {WordService} from "../_services/word-service.service";
 import {WordInfo} from "../word-info";
 import {ActivatedRoute, Router} from "@angular/router";
-import {StorageService} from "../_services/storage.service";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +11,6 @@ import {StorageService} from "../_services/storage.service";
 export class HomeComponent implements OnInit {
   searchText = new FormControl();
   words: WordInfo[] = [];
-  currentUser: any;
 
   constructor(
     private wordService: WordService,
@@ -39,7 +37,9 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToSearch(): void {
-    const queryParams = {word: this.searchText.getRawValue()};
-    this.router.navigate(['/search'], {queryParams});
+    if (this.searchText.getRawValue() != "") {
+      const queryParams = {word: this.searchText.getRawValue()};
+      this.router.navigate(['/search'], {queryParams});
+    }
   }
 }

@@ -8,6 +8,7 @@ import {TrainRequest} from "../train-request";
 
 
 const URLS = `${environment.wordUrl}`;
+const URLSw = `${environment.wordsUrl}`;
 
 @Injectable({
   providedIn: 'root',
@@ -19,11 +20,11 @@ export class WordService {
   }
 
   public findUserWords(): Observable<Word[]> {
-    return this.http.get<Word[]>(URLS + '/my');
+    return this.http.get<Word[]>(URLSw + '/my');
   }
 
   public findWordsForTraining(trainRequest: TrainRequest): Observable<Word[]> {
-    return this.http.post<Word[]>(URLS + '/train', trainRequest);
+    return this.http.post<Word[]>(URLSw + '/train', trainRequest);
   }
 
   public findAll(): Observable<Word[]> {
@@ -31,19 +32,19 @@ export class WordService {
   }
 
   public save(word: Word): Observable<any> {
-    return this.http.post<Word>(URLS + '/add', word);
+    return this.http.post<Word>(URLSw + '/add', word);
   }
 
   public addTranslation(id: String): Observable<Word> {
-    return this.http.post<Word>(URLS + '/translation/add', id);
+    return this.http.post<Word>(URLSw + '/translation/add', id);
   }
 
   public deleteTranslation(id: String): Observable<Word> {
-    return this.http.post<Word>(URLS + '/translation/delete', id);
+    return this.http.post<Word>(URLSw + '/translation/delete', id);
   }
 
   findWord(wordName: String, wordLang: String) {
-    return this.http.get<WordInfo>(URLS + '?word=' + wordName + "&lang=" + wordLang);
+    return this.http.get<WordInfo>(URLSw + '?word=' + wordName + "&lang=" + wordLang);
   }
 
   searchWords(searchText: String) {
@@ -51,22 +52,22 @@ export class WordService {
   }
 
   addTranslationAndWord(id: String, translation: String) {
-    return this.http.post<Word>(URLS + '/translation/new', {id, translation});
+    return this.http.post<Word>(URLSw + '/translation/new', {id, translation});
   }
 
   deleteTranslationFromWord(id: String) {
-    return this.http.post<Word>(URLS + '/translation/fulldelete', id);
+    return this.http.post<Word>(URLSw + '/translation/fulldelete', id);
   }
 
   deleteUserWord(id: String) {
-    return this.http.post<Word>(URLS + '/delete', id);
+    return this.http.post<Word>(URLSw + '/delete', id);
   }
 
   setStatusLearned(id: string) {
-    return this.http.post<Word>(URLS + '/update/learned', id);
+    return this.http.post<Word>(URLSw + '/update/learned', id);
   }
 
   setStatusLearning(id: string) {
-    return this.http.post<Word>(URLS + '/update/learning', id);
+    return this.http.post<Word>(URLSw + '/update/learning', id);
   }
 }

@@ -3,7 +3,7 @@
     <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="mx-auto" style="width: 70%">
       <mat-form-field style="width: 100%">
         <mat-label>Word</mat-label>
-        <input matInput placeholder="Введите слово" [(ngModel)]="word.word" required>
+        <input matInput placeholder="Введите слово" [(ngModel)]="word.word" name="word" required>
       </mat-form-field>
       <mat-form-field style="width: 100%">
         <mat-label>Language</mat-label>
